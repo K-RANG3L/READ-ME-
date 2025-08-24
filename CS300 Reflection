@@ -1,0 +1,50 @@
+CS 300 Module Eight Journal – Portfolio Reflection
+CS-300 – DSA: Analysis and Design    
+
+Overview
+This repository collects artifacts from CS 300 to demonstrate my ability to design and implement data-structure–driven solutions. It includes my Project Two Course Planner (Binary Search Tree) and code excerpts from earlier work. This README contains my written reflection for the Module Eight Journal.
+
+Reflection
+
+1) What was the problem you were solving in the projects for this course?
+Across the projects, I built small but complete utilities that solve practical advising and data-processing tasks:
+
+Project Two – Course Planner: Read a CSV of courses and prerequisites, store them efficiently, print the full list in alphanumeric order, and quickly look up a course’s information.
+- Earlier projects (selection/quick sort, linked list, hash table, BST): Practice choosing and implementing the right structure/algorithm for tasks such as ordering data, constant-time lookup, or ordered traversal.
+
+2) How did you approach the problem? Why are data structures important to understand?
+I began by clarifying the operations the program must optimize:  
+- load once,  
+- print all courses alphabetically, and  
+- look up a single course + prerequisites.
+
+Given those operations, I chose a Binary Search Tree (BST) keyed by course number:
+- In-order traversal naturally prints courses in sorted order without an extra sort pass.
+- Search is efficient (average O(log n)) for lookups like `CSCI400`.
+- Insertions during load are straightforward.
+
+Data structures matter because they encode performance tradeoffs: arrays/vectors are great for indexed access, lists for frequent inserts, hash tables for near-constant lookup (unsorted), and trees for sorted order + searches. Picking the right one eliminates complexity and improves runtime and memory usage.
+
+3) What roadblocks did you encounter and how did you overcome them?
+- File path / working directory issues: The program couldn’t find the CSV at first. I fixed this by setting the Visual Studio Working Directory to the project or by placing the CSV next to the executable (`x64/Debug`). I also added clearer error messages and tried alternative filenames.
+- Input variability: Some lines could be malformed or have extra spaces. I implemented `trim`, defensive CSV parsing, and warnings for malformed rows.
+- Case and formatting in search: I normalized course IDs to uppercase before searching, so `csci400` works as well as `CSCI400`.
+
+4) How has your work on this project expanded your approach to designing, developing, and testing programs?
+I leaned harder into requirements-driven design: list operations → map to structures → implement the minimal, correct API. I also used incremental tests:
+- Load → verify count.
+- Print list → compare to sample output.
+- Search common cases → verify prerequisites and “None” handling.
+
+This improved my habit of writing small, testable functions (file loader, traversal, search) and validating behavior early.
+
+5) How has your work evolved the way you write programs that are maintainable, readable, and adaptable?
+- I emphasized clear function names, comments, and single responsibility per function.
+- I avoided global state and added graceful error handling.
+- The BST implementation is self-contained, so I could later swap it for a map or hash table with minimal change to the UI layer. This separation improves adaptability.
+
+
+Run Instructions
+1. Build with a C++17 compiler (Visual Studio recommended).  
+2. Place `CS300_ABCU_Advising_Program_Input.csv` in the working directory (or set Working Directory to `$(ProjectDir)` or `$(TargetDir)`).  
+3. Run the console app:
